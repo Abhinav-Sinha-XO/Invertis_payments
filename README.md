@@ -4,13 +4,10 @@
 
 A modern full-stack payment application built with the MERN stack that allows users to transfer money securely.
 
+## Live Demo
 
-
-
-
-
-
-
+- Frontend: [https://ephemeral-youtiao-46cf3b.netlify.app](https://ephemeral-youtiao-46cf3b.netlify.app)
+- API: [https://invertis-payments-api.onrender.com](https://invertis-payments-api.onrender.com)
 
 ## Features
 
