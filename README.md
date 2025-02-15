@@ -1,6 +1,16 @@
 # Invertis Payments App
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b7600c71-8767-4335-834f-37971386721d/deploy-status)](https://app.netlify.com/sites/ephemeral-youtiao-46cf3b/deploys)
+
 A modern full-stack payment application built with the MERN stack that allows users to transfer money securely.
+
+
+
+
+
+
+
+
 
 ## Features
 
