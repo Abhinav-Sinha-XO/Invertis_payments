@@ -44,7 +44,11 @@ router.post('/signup', async (req,res)=>{
     Math.random() *10000 +1
   })
 
-  const token = jwt.sign({userId:userId},process.env.JWT_SECRET)
+  const token = jwt.sign(
+  { userId: user._id },
+  process.env.JWT_SECRET,
+  { expiresIn: '24h' }
+);
   return res.status(200).json({
     message:"User created successfully",
     token:token
@@ -66,7 +70,11 @@ router.post('/signin', async (req,res)=>{
   
 
   if(user){
-    const token = jwt.sign({userId:user._id},process.env.JWT_SECRET)
+    const token = jwt.sign(
+  { userId: user._id },
+  process.env.JWT_SECRET,
+  { expiresIn: '24h' }
+);
      
     res.json({
       token:token
