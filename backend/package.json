@@ -6,8 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+     "start": "NODE_ENV=production node -r dotenv/config index.js dotenv_config_path=.env.production",
+    "dev": "NODE_ENV=development node -r dotenv/config index.js"
+    
   },
   "keywords": [],
   "author": "",
@@ -21,8 +22,5 @@
     "mongoose": "^8.10.0",
     "router": "^2.1.0",
     "zod": "^3.22.4"
-  },
-  "devDependencies": {
-    "@types/node": "^22.13.4"
   }
 }
