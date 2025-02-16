@@ -1,14 +1,10 @@
-
-export function Button({ label, onClick }) {
+export function Button({ label, onClick, className = "" }) {
   return (
-    <div className="pt-10">
-      <button
+    <button
       onClick={onClick}
-      type="button"
-      className="w-full text-white bg-black hover:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer"
+      className={`w-full bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors ${className}`}
     >
       {label}
     </button>
-    </div>
   );
 }
