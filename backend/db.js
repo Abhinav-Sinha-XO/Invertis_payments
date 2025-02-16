@@ -1,6 +1,33 @@
 const mongoose = require("mongoose")
+require('dotenv').config()
 
-mongoose.connect(process.env.MONGODB_URI)
+const connectDB = async () => {
+  try {
+    const options = {
+      serverSelectionTimeoutMS: 30000,
+      socketTimeoutMS: 45000,
+      family: 4,
+      maxPoolSize: 10
+    };
+
+    await mongoose.connect(process.env.MONGODB_URI, options);
+    console.log('MongoDB connected successfully');
+
+    mongoose.connection.on('error', err => {
+      console.error('MongoDB connection error:', err);
+    });
+
+    mongoose.connection.on('disconnected', () => {
+      console.log('MongoDB disconnected. Attempting to reconnect...');
+    });
+
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    throw error;
+  }
+};
+
+
 
 const userSchema = mongoose.Schema({
   username:{
@@ -48,4 +75,4 @@ const User = mongoose.model('User', userSchema)
 const Account = mongoose.model('Account',accountSchema)
 
 
-module.exports = { User, Account }
+module.exports = { User, Account, connectDB }
