@@ -7,67 +7,82 @@ import { BottomWarning } from "../components/BottomWarning"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-export const Signin = () => {
+export const Signup = () => {
+  const [firstname, setFirstName] = useState("")
+  const [lastname, setLastName] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
-   
+  
   return (
     <div className="bg-black min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-xl shadow-2xl shadow-white p-6 sm:p-8">
           <div className="text-center space-y-4">
-            <Heading label={"SignIn"} />
+            <Heading label={"Sign Up"} />
             <SubHeading 
-              label={"Enter your credentials to access your account"}
+              label={"Enter your information to create an account"}
               className="text-sm sm:text-base text-gray-600"
             />
           </div>
 
           <div className="mt-8 space-y-6">
-            <InputBox 
-              onChange={(e) => {setUsername(e.target.value)}}
-              label={"Email"}
-              placeholder={"marco.1@gmail.com"}
-              className="w-full"
-            />
+            <div className="space-y-4">
+              <InputBox 
+                onChange={(e) => {setUsername(e.target.value)}}
+                label={"Email"}
+                placeholder={"marco.1@gmail.com"}
+                className="w-full"
+              />
 
-            <InputBox 
-              onChange={(e) => {setPassword(e.target.value)}}
-              label={"Password"}
-              placeholder={"password"}
-              className="w-full"
-            />
+              <InputBox 
+                onChange={(e) => {setPassword(e.target.value)}}
+                label={"Password"}
+                placeholder={"password"}
+                type="password"
+                className="w-full"
+              />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <InputBox 
+                  onChange={(e) => {setFirstName(e.target.value)}}
+                  label={"First Name"}
+                  placeholder={"Marco"}
+                  className="w-full"
+                />
+                
+                <InputBox 
+                  onChange={(e) => {setLastName(e.target.value)}}
+                  label={"Last Name"}
+                  placeholder={"Denis"}
+                  className="w-full"
+                />
+              </div>
+            </div>
 
             <div className="pt-2">
               <Button
                 onClick={async () => {
                   try {
-                    const requestBody = {
-                      username,
-                      password,
-                    };
-                      
                     const response = await axios.post(
-                      `${import.meta.env.VITE_API_URL}/api/v1/user/signin`,
-                      requestBody
+                      `${import.meta.env.VITE_API_URL}/api/v1/user/signup`,
+                      {
+                        username,
+                        password,
+                        firstname,
+                        lastname
+                      }
                     );
-                   
-                    if (!response.data.token) {
-                      setMessage("No token received from server");
-                      return;
-                    }
-
                     localStorage.setItem("token", response.data.token);
-                    setMessage("Sign in successful!");
+                    setMessage("Sign up successful!");
                     navigate("/dashboard");
                   } catch (error) {
-                    console.error("Error during signin:", error);
-                    setMessage("Sign in failed. Please try again.");
+                    console.error("Error during signup:", error);
+                    setMessage("Sign up failed. Please try again.");
                   }
                 }}
-                label={"Sign In"}
+                label={"Sign Up"}
                 className="w-full"
               />
             </div>
@@ -79,10 +94,10 @@ export const Signin = () => {
             )}
 
             <BottomWarning 
-              label={"Don't have an account?"} 
-              buttonText={"Sign up"} 
-              to={"/signup"}
-              className="mt-4" 
+              label={"Already have an account?"} 
+              buttonText={"Sign in"} 
+              to={"/signin"}
+              className="mt-4"
             />
           </div>
         </div>
